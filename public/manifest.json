@@ -1,0 +1,25 @@
+{
+  "name": "Parco Archeologico di Saturo",
+  "short_name": "Satyrion",
+  "description": "Scopri le storie millenarie del Parco Archeologico di Saturo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B0000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/Satyrion logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/Satyrion logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "travel", "culture"],
+  "lang": "it",
+  "dir": "ltr"
+}
