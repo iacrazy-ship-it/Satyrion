@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flipbook</title>
+    <!-- DearFlip CSS from GitHub (jsDelivr) -->
+    <link href="https://cdn.jsdelivr.net/gh/dearhive/dearflip-js-flipbook@master/dflip/css/dflip.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/gh/dearhive/dearflip-js-flipbook@master/dflip/css/themify-icons.min.css" rel="stylesheet" type="text/css">
+    <style>
+      html, body { height: 100%; margin: 0; }
+      #flip-container { height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div id="flip-container"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DearFlip JS from GitHub (jsDelivr) -->
+    <script id="dflip-script" src="https://cdn.jsdelivr.net/gh/dearhive/dearflip-js-flipbook@master/dflip/js/dflip.min.js"></script>
+    <script>
+      (function(){
+        const log = (...args) => { console.log('[flipbook]', ...args); };
+        function getParam(name){
+          const url = new URL(window.location.href);
+          return url.searchParams.get(name) || '';
+        }
+        const src = getParam('src');
+        log('Init flipbook.html, src =', src);
+        const container = document.getElementById('flip-container');
+        const book = document.createElement('div');
+        book.className = '_df_book';
+        book.setAttribute('source', src);
+        book.style.width = '100%';
+        book.style.height = '100%';
+        container.appendChild(book);
+
+        // Quick availability logs
+        log('jQuery present:', !!window.jQuery);
+        log('dflip jQuery plugin present (pre):', !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.dflip));
+        log('DFLIP global present (pre):', !!window.DFLIP);
+
+        // Log script load status
+        const dflipScript = document.getElementById('dflip-script');
+        if (dflipScript) {
+          dflipScript.addEventListener('load', function(){
+            log('dflip.min.js loaded');
+            log('dflip jQuery plugin present (post):', !!(window.jQuery && window.jQuery.fn && window.jQuery.fn.dflip));
+            log('DFLIP global present (post):', !!window.DFLIP);
+          });
+          dflipScript.addEventListener('error', function(){
+            log('ERROR loading dflip.min.js');
+          });
+        }
+
+        // Check that PDF url is reachable
+        if (src) {
+          fetch(src, { method: 'HEAD' }).then(r => log('PDF HEAD status', r.status)).catch(e => log('PDF HEAD error', String(e)));
+        }
+
+        function tryInit(count = 0) {
+          if (window.jQuery && window.jQuery.fn && typeof window.jQuery.fn.dflip === 'function') {
+            log('Initializing via jQuery.fn.dflip');
+            try { window.jQuery(book).dflip(); log('dflip() init ok'); } catch (e) { log('dflip() init error', String(e)); }
+            return;
+          }
+          if (window.DFLIP) {
+            try {
+              // Some builds expose constructor
+              // @ts-ignore
+              new window.DFLIP(book);
+              log('Initialized via new DFLIP(book)');
+              return;
+            } catch (e) { log('new DFLIP(book) failed', String(e)); }
+            if (typeof window.DFLIP.parse === 'function') {
+              try { window.DFLIP.parse(); log('Initialized via DFLIP.parse()'); return; } catch(e) { log('DFLIP.parse error', String(e)); }
+            }
+          }
+          if (count < 50) {
+            setTimeout(() => tryInit(count + 1), 100);
+          } else {
+            log('Failed to initialize DearFlip after retries');
+          }
+        }
+        tryInit();
+      })();
+    </script>
+  </body>
+</html>
+

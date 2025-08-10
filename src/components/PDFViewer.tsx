@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -10,6 +10,8 @@ interface PDFViewerProps {
 }
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, isOpen, onClose, isItalian }) => {
+  const iframeSrc = `/flipbook.html?src=${encodeURIComponent(pdfUrl)}`;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -41,12 +43,12 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ pdfUrl, isOpen, onClose, isItalia
               </button>
             </div>
 
-            {/* PDF Content */}
+            {/* Flipbook Content via DearFlip standalone page */}
             <div className="flex-1 overflow-hidden">
               <iframe
-                src={`${pdfUrl}#toolbar=1&navpanes=1&scrollbar=1&statusbar=0&menubar=0&download=0&print=0`}
+                src={iframeSrc}
                 className="w-full h-full border-0"
-                title={isItalian ? 'Guida PDF Italiano' : 'PDF Guide English'}
+                title={isItalian ? 'Flipbook Italiano' : 'Flipbook English'}
                 style={{ minHeight: '70vh' }}
               />
             </div>
