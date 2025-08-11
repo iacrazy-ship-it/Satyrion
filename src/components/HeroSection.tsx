@@ -41,10 +41,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
       
       {/* Logo integrato come parte del contenuto per evitare sovrapposizioni */}
       
-      {/* Leporano, Italia */}
-      <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-10 flex items-center space-x-1 sm:space-x-2 text-saturo-secondary font-bold">
-        <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-        <span className="text-sm sm:text-base md:text-lg lg:text-xl font-serif">Leporano, Italia</span>
+      {/* Leporano, Italia - chip responsiva, non interferisce con interazioni */}
+      <div className="absolute bottom-2 md:bottom-4 lg:bottom-6 right-2 md:right-4 lg:right-6 z-20 pointer-events-none">
+        <div className="flex items-center gap-1 sm:gap-2 bg-black/25 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full shadow">
+          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+          <span className="font-serif text-[10px] sm:text-xs md:text-sm lg:text-base">Leporano, Italia</span>
+        </div>
       </div>
 
       {/* Content centrato orizzontalmente e verticalmente */}
