@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Responsive tweaks for hero in orientation changes */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero-section {
+    min-height: 100vh;
+  }
+  .hero-logo {
+    top: 0.5rem;
+    transform: translateX(-50%);
+  }
+  .hero-content {
+    padding-top: clamp(3rem, 18vh, 12rem);
+  }
+  .hero-section .demoPage,
+  .hero-section img {
+    max-width: 100%;
+  }
+}
+
+@media (orientation: portrait) {
+  .hero-content {
+    padding-top: clamp(6rem, 24vh, 24rem);
+  }
+}

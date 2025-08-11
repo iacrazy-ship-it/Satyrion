@@ -28,7 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
   }, []);
 
   return (
-    <section className="relative h-[80vh] overflow-hidden">
+    <section className="relative hero-section min-h-screen overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -39,16 +39,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
         <div className="absolute inset-0 bg-saturo-secondary/40"></div>
       </div>
       
-      {/* Logo integrato sull'immagine - sempre sopra lo sfondo, non collide con i contenuti */}
-      <div className="absolute top-4 sm:top-8 md:top-12 lg:top-16 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none flex flex-col items-center">
-        <div className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96 overflow-hidden">
-          <img 
-            src="/images/Satyrion logo.png" 
-            alt="Logo Satyrion" 
-            className="w-full h-full object-contain drop-shadow-2xl"
-          />
-        </div>
-      </div>
+      {/* Logo integrato come parte del contenuto per evitare sovrapposizioni */}
       
       {/* Leporano, Italia */}
       <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 z-10 flex items-center space-x-1 sm:space-x-2 text-saturo-secondary font-bold">
@@ -56,8 +47,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
         <span className="text-sm sm:text-base md:text-lg lg:text-xl font-serif">Leporano, Italia</span>
       </div>
 
-      {/* Content - padding top aumentato per evitare sovrapposizioni con il logo */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-40 sm:pt-56 md:pt-64 lg:pt-72 xl:pt-80">
+      {/* Content centrato orizzontalmente e verticalmente */}
+      <div className="relative z-10 min-h-screen hero-content flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-6 sm:mb-8">
+          <img
+            src="/images/Satyrion logo.png"
+            alt="Logo Satyrion"
+            className="mx-auto w-[clamp(6rem,12vw,16rem)] h-auto drop-shadow-2xl pointer-events-none"
+          />
+        </div>
         <motion.h1 
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-white mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 20 }}
