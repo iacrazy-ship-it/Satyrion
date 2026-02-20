@@ -58,11 +58,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
       </div>
 
       {/* Main Content Container - Using Flex to ensure flow and avoid overlap */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 py-8 sm:py-12 flex flex-col items-center justify-center min-h-screen text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:py-12 flex flex-col items-center justify-start sm:justify-center min-h-screen text-center">
 
         {/* Logo - now part of the flex flow */}
         <motion.div
-          className="mb-6 sm:mb-8 flex justify-center"
+          className="mb-2 sm:mb-4 flex justify-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -79,7 +79,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
         {/* Text and Buttons Content */}
         <div className="flex flex-col items-center">
           <motion.h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-white mb-3 sm:mb-6 drop-shadow-md leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-white mb-2 sm:mb-4 drop-shadow-md leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
