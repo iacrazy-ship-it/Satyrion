@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent scroll - single full-viewport page */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Full-viewport hero - responsive on any device */
+.hero-section {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport for mobile browsers */
+  min-height: 100vh;
+  min-height: 100dvh;
+}
