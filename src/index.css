@@ -2,16 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent scroll - single full-viewport page */
+/* Elegant scrolling setup - prevents horizontal overflow while allowing vertical scroll when content exceeds viewport */
 html, body, #root {
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: #0b0f19; /* Consistent dark space theme background */
 }
 
-/* Full-viewport hero - responsive on any device */
+/* Responsive hero section */
 .hero-section {
-  height: 100vh;
-  height: 100dvh; /* Dynamic viewport for mobile browsers */
   min-height: 100vh;
   min-height: 100dvh;
 }

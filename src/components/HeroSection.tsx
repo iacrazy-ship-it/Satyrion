@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, MapPin } from 'lucide-react';
 import QRCode from 'qrcode';
+import CategoryGrid, { type CategoryItem } from './CategoryGrid';
 
 export type PdfLanguage = 'it' | 'en' | 'es';
 
 interface HeroSectionProps {
   onPdfSelect: (pdfPath: string, language: PdfLanguage) => void;
+  onMediaSelect: (type: 'video' | 'gallery', title: string, files: string[]) => void;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect, onMediaSelect }) => {
   const [qrIt, setQrIt] = useState<string>('');
   const [qrEn, setQrEn] = useState<string>('');
   const [qrEs, setQrEs] = useState<string>('');
@@ -58,7 +60,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
       </div>
 
       {/* Main Content Container - Using Flex to ensure flow and avoid overlap */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 pb-8 sm:py-12 flex flex-col items-center justify-start sm:justify-center min-h-screen text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pt-12 pb-16 flex flex-col items-center justify-start min-h-screen text-center">
 
         {/* Logo - now part of the flex flow */}
         <motion.div
@@ -171,6 +173,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onPdfSelect }) => {
               <span className="text-[10px] sm:text-xs text-white/90 font-sans">Continúa en smartphone</span>
             </div>
           </motion.div>
+
+          {/* Category Exploration Grid */}
+          <CategoryGrid 
+            onCategorySelect={(category) => onMediaSelect(category.type, category.name, category.mediaFiles)} 
+          />
         </div>
       </div>
 
